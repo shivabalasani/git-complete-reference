@@ -1,0 +1,24 @@
+Getting a Git Repository
+    You typically obtain a Git repository in one of two ways:
+        You can take a local directory that is currently not under version control, and turn it into a Git repository, or
+        You can clone an existing Git repository from elsewhere.
+
+Initializing a Repository in an Existing Directory
+$ cd C:/Users/user/my_project
+
+$ git init
+    This creates a new subdirectory named .git that contains all of your necessary repository files — a Git repository skeleton. At this point, nothing in your 
+    project  is tracked yet. 
+
+If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+At this point, you have a Git repository with tracked files and an initial commit.
+
+
+Cloning an Existing Repository
+$ git clone https://github.com/libgit2/libgit2
+
+If you want to clone the repository into a directory named something other than libgit2, you can specify the new directory name as an additional argument:
+$ git clone https://github.com/libgit2/libgit2 mylibgit
