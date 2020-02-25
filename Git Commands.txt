@@ -1,0 +1,243 @@
+Open Git Bash
+git --version
+
+To open home directory
+start .
+mv terminal-config .terminal-config
+mv bash_profile  .bash_profile
+
+git config --list
+git config [--global] user.name "cslplasma"
+git config [--global] user.email shiva.balasani@cslplasma.com
+
+git config [--global] core.editor "code --wait"
+
+1)Initialize repository
+git init
+
+2)Stage Files
+git add index.html
+git add . (stage all files)
+
+3)Commit changes
+git commit -m "Initial Commit"
+
+or
+git commit -a -m "Initial Commit" (Stages and Commits files)
+
+git commit (opens visual studio code editor. enter message and close. It will commit the changes.)
+
+git diff index.html
+git diff e10ddc6(SHA value)
+git diff e10ddc6 d10ddc6
+git diff HEAD~1 HEAD~4
+
+git remote add origin https://github.com/cslplasma/test.git
+git push -u origin master
+
+Pull changes from Github repository
+git pull origin master
+
+Set up to track remote branch master.
+git branch --set-upstream-to=origin/master master
+git pull (don't have to type origin master)
+
+//Check if local repository is up to date with remote repository
+git status
+
+git log
+
+//To get more information about a commit (git diff + git log)
+git show e10ddc6
+git show HEAD (last commit is head)
+git show HEAD~3 (Three committs before the head commit)
+
+git annotate pom.xml
+
+=================================================================================================
+//UNDOING CHANGES AND REVERTING COMMITS
+//To undo the changes which are not staged
+git checkout -- index.html
+
+//If the files are stage. To unstage and discard the changes
+git reset HEAD index.html (only unstages)
+git reset HEAD . (unstages all files)
+
+git checkout -- index.html
+git checkout -- . (discards all files)
+
+//If files are staged and commited
+git checkout e10ddc6 index.html (SHA of the commit you want to revert back to)
+
+=================================================================================================
+
+Creating a Branch
+
+git branch branch-name (To create branch with name branch-name)
+git branch ( To list all branches)
+
+git checkout branch-name (To switch to branch branch-name)
+
+git checkout -b new-branch ( To create and switch to new-branch in single command)
+
+git push origin branch-name (To push branch to remote respository)
+git checkout --track origin/branch-name ( Branch set up to track remote branch 'branch-name' from 'origin')
+git log --graph
+
+git checkout dev
+git merge dev-sub-branch dev  (merge dev-sub-branch to dev branch)
+git branch -d dev-sub-branch (Delete branch)
+git push origin dev
+
+git merge --abort ( Abort merge if there is conflicts)
+
+git tag -a V1.0 -m "First Public Release" (To tag a repository)
+git show V1.0
+
+git log --pretty=oneline
+git tag -a V1.0-beta 6d59826b -m "beta version" (To tag a previous commit sha version)
+git push origin --tags ( To push tags to remote)
+
+git shortlog (To find contributors
+
+=================================================================================================
+GitHub New Repository :
+…or create a new repository on the command line
+echo "# test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/cslplasma/test.git
+git push -u origin master
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/cslplasma/test.git
+git push -u origin master
+
+…or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+=================================================================================================
+
+
+
+
+error: src refspec master does not match any.
+git show-ref
+git push origin HEAD:master
+
+
+
+=================================================================================================
+Deploy to Heroku :
+From GitBash (Not Command Prompt)
+$ ls -a -l ~/.ssh
+drwxr-xr-x 1 U0043369 1049089   0 Nov 21 10:18 ./
+drwxr-xr-x 1 U0043369 1049089   0 Dec 18 15:39 ../
+-rw-r--r-- 1 U0043369 1049089 801 Nov 21 10:19 known_hosts
+
+
+$ ssh-keygen -t rsa -b 4096 -C "shiva.balasani@gmail.com"
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/u0043369/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/u0043369/.ssh/id_rsa.
+Your public key has been saved in /c/Users/u0043369/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:OQulJNbgohVY5iYhYb5WRVaRmcwycA0PljeTBnx/z48 shiva.balasani@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|+=+.=XOo*        |
+|=+ o=Bo#         |
+|..=.+ O.=        |
+| =oo o o o .     |
+|.o    o S . o    |
+|.      . o   o   |
+|        .     o  |
+|             E . |
+|                 |
++----[SHA256]-----+
+
+
+
+$ ls -a -l ~/.ssh
+drwxr-xr-x 1 U0043369 1049089    0 Dec 18 16:26 ./
+drwxr-xr-x 1 U0043369 1049089    0 Dec 18 15:39 ../
+-rw-r--r-- 1 U0043369 1049089 3389 Dec 18 16:26 id_rsa
+-rw-r--r-- 1 U0043369 1049089  750 Dec 18 16:26 id_rsa.pub   (Public file)
+-rw-r--r-- 1 U0043369 1049089  801 Nov 21 10:19 known_hosts
+
+To start ssh agent :
+$ eval $(ssh-agent -s)
+Agent pid 1692
+
+To register the file
+$ ssh-add ~/.ssh/id_rsa
+Identity added: /c/Users/u0043369/.ssh/id_rsa (shiva.balasani@gmail.com)
+
+$ cat ~/.ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCppU2rcjnifau6PIfZX/IQ0UyjyGIOFEF8RtuQQaZyrRkZUb7xJuABSrULuUjmYsoue11Lp5SiB8xQjSfj+BUQXYl58OruMdp+oj/58xr2s1btubLkkeThCOyzY07E9JRdBHeCsltigP0pu+WeozYzAvB670zHPJdEePwOQqmQOQpnhiYeES/9DwGRVDfw7z2Yl6qWgJtTO8fH9bj2R7RQzKnyyPJi6Knwup8IW1OXUveIuinmQqKhhh0rVwl7IlwU18JXFDQ5S2pf9y2fc8qI1aZR+jp5m8ISCT+wK8zPf66yLWPgeHxSFdRzF4qasp6BYnOTYNCyr+cvNfHCOxbECzD8PcF2DRkQVYWnr3553QKqEr6WU2neKRW+1RL/LsJV0NLzQI7U4HhD49/+r/jzkLzAaVC+e4NFdrt0KnHtaIn7FpNQcRi8X7JqTyl8QENac2QscbsBEl0VFt6GJBuDfAuzgywM4DGG27VUZBtWSEkIqVPCkfVJzQK7NBuF01l+UBrknYo8nYt8Pj0VclzwiFYaMDsN4ApX8yCZs8KvAECNtHJJzdbShU5mzjgoMHGxRUJlLWUCd2RhHic69nRw2ZlxmbKi/VaNZara5wCKx6XhWJMHfR1sJfKtyW2yCcImOnoJ15ES0UGUwO7satLDkuOiGJ/oSu7tmB3eoPWYMQ== shiva.balasani@gmail.com
+
+$ ssh -T git@github.com
+Warning: Permanently added the RSA host key for IP address '192.30.253.112' to the list of known hosts.
+Hi shivabalasani! You've successfully authenticated, but GitHub does not provide shell access.
+
+C:\development\JavaScript\nodejs-complete-reference\web-server> heroku keys:add
+
+C:\development\JavaScript\nodejs-complete-reference\web-server> heroku create skb-weather-application
+
+heroku git:remote -a skb-weather-application
+C:\development\JavaScript\nodejs-complete-reference\web-server> git push heroku master
+
+git init
+heroku git:remote -a skb-weather-application
+
+$ heroku login
+Clone the repository
+Use Git to clone skb-weather-application's source code to your local machine.
+
+$ heroku git:clone -a skb-weather-application
+$ cd skb-weather-application
+Deploy your changes
+Make some changes to the code you just cloned and deploy them to Heroku using Git.
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+=================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git clone issue
+Go to Credential Manager and Windows Credentials
+Delete the git Generic Credentails that was set
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
