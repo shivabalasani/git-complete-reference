@@ -6,3 +6,51 @@ $ git commit --amend
 
 The same commit-message editor fires up, but it already contains the message of your previous commit. You can edit the message the same as always, 
 but it overwrites your previous commit.
+
+As an example, if you commit and then realize you forgot to stage the changes in a file you wanted to add to this commit, you can do something like this:
+$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+You end up with a single commit — the second commit replaces the results of the first.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Unstaging a Staged File
+ For example, let’s say you’ve changed two files and want to commit them as two separate changes, but you accidentally type git add * and stage them both. 
+ How can you unstage one of the two? The git status command reminds you:
+
+$ git add *
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+    renamed:    README.md -> README
+    modified:   CONTRIBUTING.md
+Right below the “Changes to be committed” text, it says use git reset HEAD <file>... to unstage. So, let’s use that advice to unstage the CONTRIBUTING.md file:
+
+$ git reset HEAD CONTRIBUTING.md
+Unstaged changes after reset:
+M	CONTRIBUTING.md
+The CONTRIBUTING.md file is modified but once again unstaged.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Unmodifying a Modified File
+What if you realize that you don’t want to keep your changes to the CONTRIBUTING.md file? How can you easily unmodify it — revert it back to what it looked like 
+when you last committed (or initially cloned, or however you got it into your working directory)?Luckily, git status tells you how to do that, too. In the last
+example output, the unstaged area looks like this:
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+    modified:   CONTRIBUTING.md
+
+It tells you pretty explicitly how to discard the changes you’ve made. Let’s do what it says:
+
+$ git checkout -- CONTRIBUTING.md
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+    renamed:    README.md -> README
+
+It’s important to understand that git checkout -- <file> is a dangerous command. Any local changes you made to that file are gone — Git just replaced that 
+file with the most recently-committed version. Don’t ever use this command unless you absolutely know that you don’t want those unsaved local changes.
