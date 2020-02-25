@@ -1,0 +1,8 @@
+Undoing Things
+One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your commit message. 
+If you want to redo that commit, make the additional changes you forgot, stage them, and commit again using the --amend option:
+
+$ git commit --amend
+
+The same commit-message editor fires up, but it already contains the message of your previous commit. You can edit the message the same as always, 
+but it overwrites your previous commit.
