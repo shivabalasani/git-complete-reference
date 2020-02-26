@@ -59,7 +59,7 @@ git annotate pom.xml
 //To undo the changes which are not staged
 git checkout -- index.html
 
-//If the files are stage. To unstage and discard the changes
+//If the files are staged. To unstage and discard the changes
 git reset HEAD index.html (only unstages)
 git reset HEAD . (unstages all files)
 
@@ -102,7 +102,7 @@ git shortlog (To find contributors
 
 =================================================================================================
 GitHub New Repository :
-…or create a new repository on the command line
+ï¿½or create a new repository on the command line
 echo "# test" >> README.md
 git init
 git add README.md
@@ -110,11 +110,11 @@ git commit -m "first commit"
 git remote add origin https://github.com/cslplasma/test.git
 git push -u origin master
 
-…or push an existing repository from the command line
+ï¿½or push an existing repository from the command line
 git remote add origin https://github.com/cslplasma/test.git
 git push -u origin master
 
-…or import code from another repository
+ï¿½or import code from another repository
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 =================================================================================================
 

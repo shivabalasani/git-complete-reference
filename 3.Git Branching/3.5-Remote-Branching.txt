@@ -1,0 +1,27 @@
+Remote Branches
+Remote references are references (pointers) in your remote repositories, including branches, tags, and so on. You can get a full list of remote references 
+explicitly with git ls-remote <remote>, or git remote show <remote> for remote branches as well as more information. Nevertheless, a more common way is to take 
+advantage of remote-tracking branches.
+
+$git ls-remote <remote>, or git remote show <remote> 
+
+Remote-tracking branches are references to the state of remote branches. They’re local references that you can’t move; Git moves them for you whenever you do any 
+network communication, to make sure they accurately represent the state of the remote repository. 
+Remote-tracking branch names take the form <remote>/<branch>. For instance, if you wanted to see what the master branch on your origin remote looked like as of the 
+last time you communicated with it, you would check the origin/master branch. If you were working on an issue with a partner and they pushed up an iss53 branch, 
+you might have your own local iss53 branch, but the branch on the server would be represented by the remote-tracking branch origin/iss53.
+
+“origin” is not special
+Just like the branch name “master” does not have any special meaning in Git, neither does “origin”. While “master” is the default name for a starting branch when 
+you run git init which is the only reason it’s widely used, “origin” is the default name for a remote when you run git clone. If you run git clone -o booyah instead,
+then you will have booyah/master as your default remote branch.
+
+Server and local repositories after cloning
+If you do some work on your local master branch, and, in the meantime, someone else pushes to git.ourcompany.com and updates its master branch, then your histories
+move forward differently. Also, as long as you stay out of contact with your origin server, your origin/master pointer doesn’t move.
+
+Local and remote work can diverge
+To synchronize your work with a given remote, you run a git fetch <remote> command (in our case, git fetch origin). This command looks up which server “origin” 
+is (in this case, it’s git.ourcompany.com), fetches any data from it that you don’t yet have, and updates your local database, moving your origin/master pointer 
+to its new, more up-to-date position.
+git fetch updates your remote-tracking branches
