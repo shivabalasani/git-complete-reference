@@ -207,37 +207,89 @@ $ git commit -am "make it better"
 $ git push heroku master
 =================================================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 git clone issue
 Go to Credential Manager and Windows Credentials
 Delete the git Generic Credentails that was set
 
 
+==================================================================================================================================================
+Git Commands
+==================================================================================================================================================
+3.1 Git Branching
+$ git add README test.rb LICENSE
+$ git commit -m 'The initial commit of my project'
+$ git branch testing
+$ git log --oneline --decorate
+$ git checkout testing //To switch to an existing branch, you run the git checkout command
+$ git commit -a -m 'made a change'
+$ git checkout master
+$ git log --oneline --decorate --graph --all
 
+$ git checkout -b <newbranchname> //Creating a new branch and switching to it at the same time
 
+=================================================================================================
+3.2 Branching and Merging
+$ git checkout -b iss53
+$ git branch iss53
+$ git checkout iss53
+$ git commit -a -m 'added a new footer [issue 53]'
+$ git checkout master
+$ git merge hotfix
+$ git branch -d hotfix
 
+$ git checkout master
+$ git merge iss53
+$ git branch -d iss53
+$ git merge iss53
+$ git status
+$ git mergetool
+=================================================================================================
+3.3 Branch Management
+$ git branch
+$ git branch -v
+$ git branch --merged
+$ git branch --no-merged
+$ git branch -d testing
+$ git checkout testing
+$ git branch --no-merged master
+=================================================================================================
+3.5 Remote branches
+$ git ls-remote <remote>
+$ git remote show <remote> 
+$ git fetch <remote> //To synchronize your work with a given remote
+$ git remote add teamone git://git.team1.ourcompany.com
+$ git fetch teamone // To fetch everything the remote teamone server has that you don't have
 
+$ git push <remote> <branch>
+$ git push origin serverfix
+$ git fetch origin
+$ git merge origin/serverfix
 
+$ git checkout -b serverfix origin/serverfix
 
+$ git checkout --track origin/serverfix
+$ git checkout serverfix
+$ git checkout -b sf origin/serverfix
+$ git branch -u origin/serverfix
+$ git branch -vv
+$ git fetch --all; git branch -vv
+$ git pull
+$ git push origin --delete serverfix //Deleting Remote Branches
 
+=================================================================================================
+3.6 Rebasing
+$ git checkout experiment
+$ git rebase master
 
+$ git checkout master
+$ git merge experiment
+$ git rebase --onto master server client
 
+$ git checkout master
+$ git merge client
+$ git rebase master server
 
-
-
-
-
-
-
+$ git checkout master
+$ git merge server
+$ git branch -d client
+$ git branch -d server
