@@ -276,6 +276,8 @@ $ git fetch --all; git branch -vv
 $ git pull
 $ git push origin --delete serverfix //Deleting Remote Branches
 
+$ git push --set-upstream origin <branch> //To push to remote with creating a remote branch
+
 =================================================================================================
 3.6 Rebasing
 $ git checkout experiment
