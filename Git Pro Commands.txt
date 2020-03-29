@@ -1,0 +1,167 @@
+
+==================================================================================================================================================
+Git Commands
+==================================================================================================================================================
+2.1 Getting a Git Repository
+$ git init
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+
+=================================================================================================
+2.2 Recording changes to repository
+$ git status
+$ git status -s //Short status
+$ git diff //To see what you’ve changed but not yet staged
+$ git diff --staged //To see what you’ve staged that will go into your next commit
+$ git diff --cached //--staged and --cached are synonyms
+$ git commit
+$ git commit -m "Story 182: Fix benchmarks for speed"
+$ git commit -a -m 'added new benchmarks' // Skipping the Staging Area
+$ git rm PROJECTS.md
+$ git rm --cached README //keep the file in your working tree but remove it from your staging area
+$ git rm log/\*.log
+$ git rm \*~
+$ git mv file_from file_to //If you want to rename a file in Git
+$ git mv README.md README
+$ mv README.md README //these three commands same as above
+$ git rm README.md
+$ git add README
+
+=================================================================================================
+2.3 Viewing the Commit History
+$ git log
+$ git log -p -2
+$ git log --stat
+$ git log --pretty=oneline  (Ohter options short, full, and fuller)
+$ git log --pretty=format:"%h - %an, %ar : %s"
+$ git log --pretty=format:"%h %s" --graph
+$ git log --since=2.weeks
+$ git log -S function_name
+$ git log --pretty="%h - %s" --author='Junio C Hamano' --since="2008-10-01" \ --before="2008-11-01" --no-merges -- t/
+
+=================================================================================================
+2.4 Undoing Things
+$ git commit --amend
+$ git reset HEAD CONTRIBUTING.md //To unstage a file
+$ git checkout -- CONTRIBUTING.md //Unmodifying a Modified File
+
+=================================================================================================
+2.5 Working with Remotes
+$ git remote //Showing Your Remotes
+$ git remote -v //shows you the URLs that Git has stored for the shortname
+$ git remote add pb https://github.com/paulboone/ticgit //Adding Remote Repositories
+$ git fetch <remote> //Fetching and Pulling from Your Remotes
+$ git push origin master //Pushing to Your Remotes
+$ git remote show origin //Inspecting a Remote
+$ git remote rename pb paul
+$ git remote remove paul
+
+=================================================================================================
+2.6 Tagging
+$ git tag //Listing Your Tags
+$ git tag -l "v1.8.5*"
+$ git tag -a v1.4 -m "my version 1.4" //Creating an annotated tag
+$ git push origin v1.5
+$ git push origin --tags 
+$ git tag -d v1.4-lw //To delete a tag on your local repository
+$ git push origin --delete <tagname>
+$ git checkout 2.0.0 //Checking out Tags
+$ git checkout 2.0-beta-0.1
+$ git checkout -b version2 v2.0.0
+
+=================================================================================================
+2.7 Git Aliases
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+$ git config --global alias.unstage 'reset HEAD --'
+$ git unstage fileA
+$ git reset HEAD -- fileA
+$ git config --global alias.last 'log -1 HEAD'
+$ git last
+$ git config --global alias.visual '!gitk'
+
+==================================================================================================
+3.1 Git Branching
+$ git add README test.rb LICENSE
+$ git commit -m 'The initial commit of my project'
+$ git branch testing
+$ git log --oneline --decorate
+$ git checkout testing //To switch to an existing branch, you run the git checkout command
+$ git commit -a -m 'made a change'
+$ git checkout master
+$ git log --oneline --decorate --graph --all
+
+$ git checkout -b <newbranchname> //Creating a new branch and switching to it at the same time
+
+=================================================================================================
+3.2 Branching and Merging
+$ git checkout -b iss53
+$ git branch iss53
+$ git checkout iss53
+$ git commit -a -m 'added a new footer [issue 53]'
+$ git checkout master
+$ git merge hotfix
+$ git branch -d hotfix
+
+$ git checkout master
+$ git merge iss53
+$ git branch -d iss53
+$ git merge iss53
+$ git status
+$ git mergetool
+=================================================================================================
+3.3 Branch Management
+$ git branch
+$ git branch -v
+$ git branch --merged
+$ git branch --no-merged
+$ git branch -d testing
+$ git checkout testing
+$ git branch --no-merged master
+=================================================================================================
+3.5 Remote branches
+$ git ls-remote <remote>
+$ git remote show <remote> 
+$ git fetch <remote> //To synchronize your work with a given remote
+$ git remote add teamone git://git.team1.ourcompany.com
+$ git fetch teamone // To fetch everything the remote teamone server has that you don't have
+
+$ git push <remote> <branch>
+$ git push origin serverfix
+$ git fetch origin
+$ git merge origin/serverfix
+
+$ git checkout -b serverfix origin/serverfix
+
+$ git checkout --track origin/serverfix
+$ git checkout serverfix
+$ git checkout -b sf origin/serverfix
+$ git branch -u origin/serverfix
+$ git branch -vv
+$ git fetch --all; git branch -vv
+$ git pull
+$ git push origin --delete serverfix //Deleting Remote Branches
+
+$ git push --set-upstream origin <branch> //To push to remote with creating a remote branch
+
+=================================================================================================
+3.6 Rebasing
+$ git checkout experiment
+$ git rebase master
+
+$ git checkout master
+$ git merge experiment
+$ git rebase --onto master server client
+
+$ git checkout master
+$ git merge client
+$ git rebase master server
+
+$ git checkout master
+$ git merge server
+$ git branch -d client
+$ git branch -d server
